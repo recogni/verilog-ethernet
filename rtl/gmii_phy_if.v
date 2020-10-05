@@ -109,13 +109,7 @@ tx_ssio_sdr_inst (
 generate
 
 if (TARGET == "XILINX") begin
-    BUFGMUX
-    gmii_bufgmux_inst (
-        .I0(clk),
-        .I1(phy_mii_tx_clk),
-        .S(mii_select),
-        .O(mac_gmii_tx_clk)
-    );
+
 end else begin
     assign mac_gmii_tx_clk = mii_select ? phy_mii_tx_clk : clk;
 end

@@ -100,11 +100,7 @@ end
 generate
 
 if (TARGET == "XILINX") begin
-    BUFG
-    mii_bufg_inst (
-        .I(phy_mii_tx_clk),
-        .O(mac_mii_tx_clk)
-    );
+
 end else begin
     assign mac_mii_tx_clk = phy_mii_tx_clk;
 end

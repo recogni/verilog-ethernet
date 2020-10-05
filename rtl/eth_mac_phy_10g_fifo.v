@@ -239,6 +239,10 @@ assign rx_bad_block = rx_sync_reg_3[2] ^ rx_sync_reg_4[2];
 assign rx_block_lock = rx_sync_reg_3[3] ^ rx_sync_reg_4[3];
 assign rx_high_ber = rx_sync_reg_3[4] ^ rx_sync_reg_4[4];
 
+wire rx_high_ber_int;
+wire rx_block_lock_int;
+wire rx_bad_block_int;
+
 always @(posedge rx_clk or posedge rx_rst) begin
     if (rx_rst) begin
         rx_sync_reg_1 <= 5'd0;

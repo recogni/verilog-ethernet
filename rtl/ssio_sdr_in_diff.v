@@ -61,35 +61,9 @@ genvar n;
 generate
 
 if (TARGET == "XILINX") begin
-    IBUFDS
-    clk_ibufds_inst (
-        .I(input_clk_p),
-        .IB(input_clk_n),
-        .O(input_clk)
-    );
-    for (n = 0; n < WIDTH; n = n + 1) begin
-        IBUFDS
-        data_ibufds_inst (
-            .I(input_d_p[n]),
-            .IB(input_d_n[n]),
-            .O(input_d[n])
-        );
-    end
+ 
 end else if (TARGET == "ALTERA") begin
-    ALT_INBUF_DIFF
-    clk_inbuf_diff_inst (
-        .i(input_clk_p),
-        .ibar(input_clk_n),
-        .o(input_clk)
-    );
-    for (n = 0; n < WIDTH; n = n + 1) begin
-        ALT_INBUF_DIFF
-        data_inbuf_diff_inst (
-            .i(input_d_p[n]),
-            .ibar(input_d_n[n]),
-            .o(input_d[n])
-        );
-    end
+   
 end else begin
     assign input_clk = input_clk_p;
     assign input_d = input_d_p;
@@ -99,7 +73,6 @@ endgenerate
 
 ssio_sdr_in #(
     .TARGET(TARGET),
-    .IODDR_STYLE(IODDR_STYLE),
     .CLOCK_INPUT_STYLE(CLOCK_INPUT_STYLE),
     .WIDTH(WIDTH)
 )

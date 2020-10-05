@@ -71,35 +71,9 @@ genvar n;
 generate
 
 if (TARGET == "XILINX") begin
-    OBUFDS
-    clk_obufds_inst (
-        .I(output_clk),
-        .O(output_clk_p),
-        .OB(output_clk_n)
-    );
-    for (n = 0; n < WIDTH; n = n + 1) begin
-        OBUFDS
-        data_obufds_inst (
-            .I(output_q[n]),
-            .O(output_q_p[n]),
-            .OB(output_q_n[n])
-        );
-    end
+
 end else if (TARGET == "ALTERA") begin
-    ALT_OUTBUF_DIFF
-    clk_outbuf_diff_inst (
-        .i(output_clk),
-        .o(output_clk_p),
-        .obar(output_clk_n)
-    );
-    for (n = 0; n < WIDTH; n = n + 1) begin
-        ALT_OUTBUF_DIFF
-        data_outbuf_diff_inst (
-            .i(output_q[n]),
-            .o(output_q_p[n]),
-            .obar(output_q_n[n])
-        );
-    end
+ 
 end else begin
     assign output_clk_p = output_clk;
     assign output_clk_n = ~output_clk;
