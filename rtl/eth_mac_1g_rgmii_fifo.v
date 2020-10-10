@@ -241,7 +241,10 @@ eth_mac_1g_rgmii_inst (
     .rx_error_bad_frame(rx_error_bad_frame_int),
     .rx_error_bad_fcs(rx_error_bad_fcs_int),
     .speed(speed_int),
-    .ifg_delay(ifg_delay)
+    .ifg_delay(ifg_delay),
+
+    .tx_ptp_ts('0),
+    .rx_ptp_ts('0)
 );
 
 axis_async_fifo_adapter #(
