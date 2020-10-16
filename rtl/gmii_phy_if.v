@@ -111,19 +111,7 @@ generate
 if (TARGET == "XILINX") begin
 
 end else begin
-// Recogni add    
-pd_ckmux
- ck_mux0
- (
-  .clk_out(mac_gmii_tx_clk),
-  .clk_0(clk),
-  .clk_1(phy_mii_tx_clk),
-  .clk_2('0),
-  .clk_3('0),
-  .sel0(mii_select),
-  .sel1(1'b0)); 
-// Recogni add
-//    assign mac_gmii_tx_clk = mii_select ? phy_mii_tx_clk : clk;
+    assign mac_gmii_tx_clk = mii_select ? phy_mii_tx_clk : clk;
 end
 
 endgenerate
