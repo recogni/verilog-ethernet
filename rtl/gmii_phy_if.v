@@ -111,7 +111,7 @@ generate
 if (TARGET == "XILINX") begin
 
 end else begin
-    assign mac_gmii_tx_clk = mii_select ? phy_mii_tx_clk : clk;
+    assign mac_gmii_tx_clk = clk;
 end
 
 endgenerate
