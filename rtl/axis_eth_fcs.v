@@ -68,9 +68,9 @@ initial begin
     end
 end
 
-reg [31:0] crc_state = 32'hFFFFFFFF;
-reg [31:0] fcs_reg = 32'h00000000;
-reg fcs_valid_reg = 1'b0;
+reg [31:0] crc_state ;
+reg [31:0] fcs_reg ;
+reg fcs_valid_reg ;
 
 wire [31:0] crc_next[KEEP_WIDTH-1:0];
 

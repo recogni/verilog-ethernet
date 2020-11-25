@@ -117,7 +117,7 @@ end
 endgenerate
 
 // reset sync
-reg [3:0] tx_rst_reg = 4'hf;
+reg [3:0] tx_rst_reg ;
 assign mac_gmii_tx_rst = tx_rst_reg[0];
 
 always @(posedge mac_gmii_tx_clk or posedge rst) begin
@@ -128,7 +128,7 @@ always @(posedge mac_gmii_tx_clk or posedge rst) begin
     end
 end
 
-reg [3:0] rx_rst_reg = 4'hf;
+reg [3:0] rx_rst_reg ;
 assign mac_gmii_rx_rst = rx_rst_reg[0];
 
 always @(posedge mac_gmii_rx_clk or posedge rst) begin

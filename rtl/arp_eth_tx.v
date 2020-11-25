@@ -120,31 +120,31 @@ transmits the complete Ethernet payload on an AXI interface.
 // datapath control signals
 reg store_frame;
 
-reg send_arp_header_reg = 1'b0, send_arp_header_next;
-reg [PTR_WIDTH-1:0] ptr_reg = 0, ptr_next;
+reg send_arp_header_reg , send_arp_header_next;
+reg [PTR_WIDTH-1:0] ptr_reg , ptr_next;
 
-reg [15:0] arp_htype_reg = 16'd0;
-reg [15:0] arp_ptype_reg = 16'd0;
-reg [15:0] arp_oper_reg = 16'd0;
-reg [47:0] arp_sha_reg = 48'd0;
-reg [31:0] arp_spa_reg = 32'd0;
-reg [47:0] arp_tha_reg = 48'd0;
-reg [31:0] arp_tpa_reg = 32'd0;
+reg [15:0] arp_htype_reg ;
+reg [15:0] arp_ptype_reg ;
+reg [15:0] arp_oper_reg ;
+reg [47:0] arp_sha_reg ;
+reg [31:0] arp_spa_reg ;
+reg [47:0] arp_tha_reg ;
+reg [31:0] arp_tpa_reg ;
 
-reg s_frame_ready_reg = 1'b0, s_frame_ready_next;
+reg s_frame_ready_reg , s_frame_ready_next;
 
-reg m_eth_hdr_valid_reg = 1'b0, m_eth_hdr_valid_next;
-reg [47:0] m_eth_dest_mac_reg = 48'd0;
-reg [47:0] m_eth_src_mac_reg = 48'd0;
-reg [15:0] m_eth_type_reg = 16'd0;
+reg m_eth_hdr_valid_reg , m_eth_hdr_valid_next;
+reg [47:0] m_eth_dest_mac_reg ;
+reg [47:0] m_eth_src_mac_reg ;
+reg [15:0] m_eth_type_reg ;
 
-reg busy_reg = 1'b0;
+reg busy_reg ;
 
 // internal datapath
 reg [DATA_WIDTH-1:0] m_eth_payload_axis_tdata_int;
 reg [KEEP_WIDTH-1:0] m_eth_payload_axis_tkeep_int;
 reg                  m_eth_payload_axis_tvalid_int;
-reg                  m_eth_payload_axis_tready_int_reg = 1'b0;
+reg                  m_eth_payload_axis_tready_int_reg ;
 reg                  m_eth_payload_axis_tlast_int;
 reg                  m_eth_payload_axis_tuser_int;
 wire                 m_eth_payload_axis_tready_int_early;
@@ -271,17 +271,17 @@ always @(posedge clk) begin
 end
 
 // output datapath logic
-reg [DATA_WIDTH-1:0] m_eth_payload_axis_tdata_reg = {DATA_WIDTH{1'b0}};
-reg [KEEP_WIDTH-1:0] m_eth_payload_axis_tkeep_reg = {KEEP_WIDTH{1'b0}};
-reg                  m_eth_payload_axis_tvalid_reg = 1'b0, m_eth_payload_axis_tvalid_next;
-reg                  m_eth_payload_axis_tlast_reg = 1'b0;
-reg                  m_eth_payload_axis_tuser_reg = 1'b0;
+reg [DATA_WIDTH-1:0] m_eth_payload_axis_tdata_reg ;
+reg [KEEP_WIDTH-1:0] m_eth_payload_axis_tkeep_reg ;
+reg                  m_eth_payload_axis_tvalid_reg , m_eth_payload_axis_tvalid_next;
+reg                  m_eth_payload_axis_tlast_reg ;
+reg                  m_eth_payload_axis_tuser_reg ;
 
-reg [DATA_WIDTH-1:0] temp_m_eth_payload_axis_tdata_reg = {DATA_WIDTH{1'b0}};
-reg [KEEP_WIDTH-1:0] temp_m_eth_payload_axis_tkeep_reg = {KEEP_WIDTH{1'b0}};
-reg                  temp_m_eth_payload_axis_tvalid_reg = 1'b0, temp_m_eth_payload_axis_tvalid_next;
-reg                  temp_m_eth_payload_axis_tlast_reg = 1'b0;
-reg                  temp_m_eth_payload_axis_tuser_reg = 1'b0;
+reg [DATA_WIDTH-1:0] temp_m_eth_payload_axis_tdata_reg ;
+reg [KEEP_WIDTH-1:0] temp_m_eth_payload_axis_tkeep_reg ;
+reg                  temp_m_eth_payload_axis_tvalid_reg , temp_m_eth_payload_axis_tvalid_next;
+reg                  temp_m_eth_payload_axis_tlast_reg ;
+reg                  temp_m_eth_payload_axis_tuser_reg ;
 
 // datapath control
 reg store_eth_payload_int_to_output;

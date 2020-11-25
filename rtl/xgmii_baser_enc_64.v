@@ -124,8 +124,8 @@ localparam [7:0]
 reg [DATA_WIDTH*7/8-1:0] encoded_ctrl;
 reg [CTRL_WIDTH-1:0] encode_err;
 
-reg [DATA_WIDTH-1:0] encoded_tx_data_reg = {DATA_WIDTH{1'b0}}, encoded_tx_data_next;
-reg [HDR_WIDTH-1:0] encoded_tx_hdr_reg = {HDR_WIDTH{1'b0}}, encoded_tx_hdr_next;
+reg [DATA_WIDTH-1:0] encoded_tx_data_reg , encoded_tx_data_next;
+reg [HDR_WIDTH-1:0] encoded_tx_hdr_reg , encoded_tx_hdr_next;
 
 assign encoded_tx_data = encoded_tx_data_reg;
 assign encoded_tx_hdr = encoded_tx_hdr_reg;

@@ -82,56 +82,56 @@ parameter LOG_AVG_SCALE = LOG_AVG+8;
 parameter LOG_AVG_SYNC_RATE = LOG_RATE;
 parameter WR_PERIOD = ((((INPUT_PERIOD_NS << 16) + INPUT_PERIOD_FNS) + 64'd0) << 16) / ((OUTPUT_PERIOD_NS << 16) + OUTPUT_PERIOD_FNS) / 2**(LOG_RATE+1);
 
-reg [NS_WIDTH-1:0] period_ns_reg = OUTPUT_PERIOD_NS;
-reg [FNS_WIDTH-1:0] period_fns_reg = OUTPUT_PERIOD_FNS;
+reg [NS_WIDTH-1:0] period_ns_reg ;
+reg [FNS_WIDTH-1:0] period_fns_reg ;
 
-reg [47:0] ts_s_reg = 0;
-reg [TS_NS_WIDTH-1:0] ts_ns_reg = 0;
-reg [FNS_WIDTH-1:0] ts_fns_reg = 0;
-reg [TS_NS_WIDTH-1:0] ts_ns_inc_reg = 0;
-reg [FNS_WIDTH-1:0] ts_fns_inc_reg = 0;
-reg [TS_NS_WIDTH+1-1:0] ts_ns_ovf_reg = {TS_NS_WIDTH+1{1'b1}};
-reg [FNS_WIDTH-1:0] ts_fns_ovf_reg = {FNS_WIDTH{1'b1}};
+reg [47:0] ts_s_reg ;
+reg [TS_NS_WIDTH-1:0] ts_ns_reg ;
+reg [FNS_WIDTH-1:0] ts_fns_reg ;
+reg [TS_NS_WIDTH-1:0] ts_ns_inc_reg ;
+reg [FNS_WIDTH-1:0] ts_fns_inc_reg ;
+reg [TS_NS_WIDTH+1-1:0] ts_ns_ovf_reg ;
+reg [FNS_WIDTH-1:0] ts_fns_ovf_reg ;
 
-reg ts_step_reg = 1'b0;
+reg ts_step_reg ;
 
-reg pps_reg = 0;
+reg pps_reg ;
 
-reg [FIFO_ADDR_WIDTH:0] wr_ptr_reg = {FIFO_ADDR_WIDTH+1{1'b0}}, wr_ptr_next;
-reg [FIFO_ADDR_WIDTH:0] wr_ptr_gray_reg = {FIFO_ADDR_WIDTH+1{1'b0}}, wr_ptr_gray_next;
-reg [FIFO_ADDR_WIDTH:0] rd_ptr_reg = {FIFO_ADDR_WIDTH+1{1'b0}}, rd_ptr_next;
-reg [FIFO_ADDR_WIDTH:0] rd_ptr_gray_reg = {FIFO_ADDR_WIDTH+1{1'b0}}, rd_ptr_gray_next;
+reg [FIFO_ADDR_WIDTH:0] wr_ptr_reg , wr_ptr_next;
+reg [FIFO_ADDR_WIDTH:0] wr_ptr_gray_reg , wr_ptr_gray_next;
+reg [FIFO_ADDR_WIDTH:0] rd_ptr_reg , rd_ptr_next;
+reg [FIFO_ADDR_WIDTH:0] rd_ptr_gray_reg , rd_ptr_gray_next;
 
-reg [FIFO_ADDR_WIDTH:0] wr_ptr_gray_sync1_reg = {FIFO_ADDR_WIDTH+1{1'b0}};
-reg [FIFO_ADDR_WIDTH:0] wr_ptr_gray_sync2_reg = {FIFO_ADDR_WIDTH+1{1'b0}};
+reg [FIFO_ADDR_WIDTH:0] wr_ptr_gray_sync1_reg ;
+reg [FIFO_ADDR_WIDTH:0] wr_ptr_gray_sync2_reg ;
 wire [FIFO_ADDR_WIDTH:0] wr_ptr_sync2;
-reg [FIFO_ADDR_WIDTH:0] rd_ptr_gray_sync1_reg = {FIFO_ADDR_WIDTH+1{1'b0}};
-reg [FIFO_ADDR_WIDTH:0] rd_ptr_gray_sync2_reg = {FIFO_ADDR_WIDTH+1{1'b0}};
+reg [FIFO_ADDR_WIDTH:0] rd_ptr_gray_sync1_reg ;
+reg [FIFO_ADDR_WIDTH:0] rd_ptr_gray_sync2_reg ;
 wire [FIFO_ADDR_WIDTH:0] rd_ptr_sync2;
 
-reg [FIFO_ADDR_WIDTH:0] wr_ptr_gray_sample_sync1_reg = {FIFO_ADDR_WIDTH+1{1'b0}};
-reg [FIFO_ADDR_WIDTH:0] wr_ptr_gray_sample_sync2_reg = {FIFO_ADDR_WIDTH+1{1'b0}};
+reg [FIFO_ADDR_WIDTH:0] wr_ptr_gray_sample_sync1_reg ;
+reg [FIFO_ADDR_WIDTH:0] wr_ptr_gray_sample_sync2_reg ;
 wire [FIFO_ADDR_WIDTH:0] wr_ptr_sample_sync2;
-reg [FIFO_ADDR_WIDTH:0] rd_ptr_gray_sample_sync1_reg = {FIFO_ADDR_WIDTH+1{1'b0}};
-reg [FIFO_ADDR_WIDTH:0] rd_ptr_gray_sample_sync2_reg = {FIFO_ADDR_WIDTH+1{1'b0}};
+reg [FIFO_ADDR_WIDTH:0] rd_ptr_gray_sample_sync1_reg ;
+reg [FIFO_ADDR_WIDTH:0] rd_ptr_gray_sample_sync2_reg ;
 wire [FIFO_ADDR_WIDTH:0] rd_ptr_sample_sync2;
 
-reg [15:0] wr_acc_reg = 16'd0, wr_acc_next;
-reg [15:0] wr_inc_reg = WR_PERIOD, wr_inc_next;
-reg [31:0] err_int_reg = 0, err_int_next;
+reg [15:0] wr_acc_reg , wr_acc_next;
+reg [15:0] wr_inc_reg , wr_inc_next;
+reg [31:0] err_int_reg , err_int_next;
 
-reg [LOG_RATE-1:0] rd_cnt_reg = {LOG_RATE{1'b0}}, rd_cnt_next;
+reg [LOG_RATE-1:0] rd_cnt_reg , rd_cnt_next;
 
-reg [LOG_FIFO_DEPTH+LOG_AVG_SCALE+2-1:0] sample_acc_reg = 0;
-reg [LOG_FIFO_DEPTH+LOG_AVG_SCALE+2-1:0] sample_avg_reg = 0;
-reg [LOG_AVG_SYNC_RATE-1:0] sample_cnt_reg = 0;
-reg sample_update_reg = 1'b0;
-reg sample_update_sync1_reg = 1'b0;
-reg sample_update_sync2_reg = 1'b0;
-reg sample_update_sync3_reg = 1'b0;
+reg [LOG_FIFO_DEPTH+LOG_AVG_SCALE+2-1:0] sample_acc_reg ;
+reg [LOG_FIFO_DEPTH+LOG_AVG_SCALE+2-1:0] sample_avg_reg ;
+reg [LOG_AVG_SYNC_RATE-1:0] sample_cnt_reg ;
+reg sample_update_reg ;
+reg sample_update_sync1_reg ;
+reg sample_update_sync2_reg ;
+reg sample_update_sync3_reg ;
 
 reg [TS_WIDTH-1:0] mem[(2**FIFO_ADDR_WIDTH)-1:0];
-reg [TS_WIDTH-1:0] mem_read_data_reg = 0;
+reg [TS_WIDTH-1:0] mem_read_data_reg ;
 
 // full when first TWO MSBs do NOT match, but rest matches
 // (gray code equivalent of first MSB different but rest same)
@@ -226,8 +226,8 @@ always @(posedge input_clk) begin
     sample_update_sync3_reg <= sample_update_sync2_reg;
 end
 
-reg [LOG_FIFO_DEPTH+LOG_AVG_SCALE+2-1:0] sample_avg_sync_reg = 0;
-reg sample_avg_sync_valid_reg = 0;
+reg [LOG_FIFO_DEPTH+LOG_AVG_SCALE+2-1:0] sample_avg_sync_reg ;
+reg sample_avg_sync_valid_reg ;
 
 always @(posedge input_clk) begin
     if (USE_SAMPLE_CLOCK) begin
@@ -336,14 +336,14 @@ always @(posedge output_clk) begin
     end
 end
 
-reg sec_mismatch_reg = 1'b0;
-reg diff_valid_reg = 1'b0;
-reg diff_offset_valid_reg = 1'b0;
+reg sec_mismatch_reg ;
+reg diff_valid_reg ;
+reg diff_offset_valid_reg ;
 
-reg [TS_NS_WIDTH+1-1:0] ts_ns_diff_reg = 31'd0;
-reg [FNS_WIDTH-1:0] ts_fns_diff_reg = 16'd0;
+reg [TS_NS_WIDTH+1-1:0] ts_ns_diff_reg ;
+reg [FNS_WIDTH-1:0] ts_fns_diff_reg ;
 
-reg [48:0] time_err_int_reg = 32'd0;
+reg [48:0] time_err_int_reg ;
 
 always @(posedge output_clk) begin
     ts_step_reg <= 0;

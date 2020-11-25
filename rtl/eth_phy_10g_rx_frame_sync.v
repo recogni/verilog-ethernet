@@ -62,13 +62,13 @@ localparam [1:0]
     SYNC_DATA = 2'b10,
     SYNC_CTRL = 2'b01;
 
-reg [5:0] sh_count_reg = 6'd0, sh_count_next;
-reg [3:0] sh_invalid_count_reg = 4'd0, sh_invalid_count_next;
-reg [SLIP_COUNT_WIDTH-1:0] slip_count_reg = 0, slip_count_next;
+reg [5:0] sh_count_reg , sh_count_next;
+reg [3:0] sh_invalid_count_reg , sh_invalid_count_next;
+reg [SLIP_COUNT_WIDTH-1:0] slip_count_reg , slip_count_next;
 
-reg serdes_rx_bitslip_reg = 1'b0, serdes_rx_bitslip_next;
+reg serdes_rx_bitslip_reg , serdes_rx_bitslip_next;
 
-reg rx_block_lock_reg = 1'b0, rx_block_lock_next;
+reg rx_block_lock_reg , rx_block_lock_next;
 
 assign serdes_rx_bitslip = serdes_rx_bitslip_reg;
 assign rx_block_lock = rx_block_lock_reg;

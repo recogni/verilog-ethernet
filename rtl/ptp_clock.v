@@ -93,39 +93,39 @@ module ptp_clock #
 
 parameter INC_NS_WIDTH = $clog2(2**PERIOD_NS_WIDTH + 2**OFFSET_NS_WIDTH + 2**DRIFT_NS_WIDTH);
 
-reg [PERIOD_NS_WIDTH-1:0] period_ns_reg = PERIOD_NS;
-reg [FNS_WIDTH-1:0] period_fns_reg = PERIOD_FNS;
+reg [PERIOD_NS_WIDTH-1:0] period_ns_reg ;
+reg [FNS_WIDTH-1:0] period_fns_reg ;
 
-reg [OFFSET_NS_WIDTH-1:0] adj_ns_reg = 0;
-reg [FNS_WIDTH-1:0] adj_fns_reg = 0;
-reg [15:0] adj_count_reg = 0;
-reg adj_active_reg = 0;
+reg [OFFSET_NS_WIDTH-1:0] adj_ns_reg ;
+reg [FNS_WIDTH-1:0] adj_fns_reg ;
+reg [15:0] adj_count_reg ;
+reg adj_active_reg ;
 
-reg [DRIFT_NS_WIDTH-1:0] drift_ns_reg = DRIFT_NS;
-reg [FNS_WIDTH-1:0] drift_fns_reg = DRIFT_FNS;
-reg [15:0] drift_rate_reg = DRIFT_RATE;
+reg [DRIFT_NS_WIDTH-1:0] drift_ns_reg ;
+reg [FNS_WIDTH-1:0] drift_fns_reg ;
+reg [15:0] drift_rate_reg ;
 
-reg [INC_NS_WIDTH-1:0] ts_inc_ns_reg = 0;
-reg [FNS_WIDTH-1:0] ts_inc_fns_reg = 0;
+reg [INC_NS_WIDTH-1:0] ts_inc_ns_reg ;
+reg [FNS_WIDTH-1:0] ts_inc_fns_reg ;
 
-reg [47:0] ts_96_s_reg = 0;
-reg [29:0] ts_96_ns_reg = 0;
-reg [FNS_WIDTH-1:0] ts_96_fns_reg = 0;
-reg [29:0] ts_96_ns_inc_reg = 0;
-reg [FNS_WIDTH-1:0] ts_96_fns_inc_reg = 0;
-reg [30:0] ts_96_ns_ovf_reg = 31'h7fffffff;
-reg [FNS_WIDTH-1:0] ts_96_fns_ovf_reg = 16'hffff;
+reg [47:0] ts_96_s_reg ;
+reg [29:0] ts_96_ns_reg ;
+reg [FNS_WIDTH-1:0] ts_96_fns_reg ;
+reg [29:0] ts_96_ns_inc_reg ;
+reg [FNS_WIDTH-1:0] ts_96_fns_inc_reg ;
+reg [30:0] ts_96_ns_ovf_reg ;
+reg [FNS_WIDTH-1:0] ts_96_fns_ovf_reg ;
 
-reg [47:0] ts_64_ns_reg = 0;
-reg [FNS_WIDTH-1:0] ts_64_fns_reg = 0;
+reg [47:0] ts_64_ns_reg ;
+reg [FNS_WIDTH-1:0] ts_64_fns_reg ;
 
-reg ts_step_reg = 1'b0;
+reg ts_step_reg ;
 
-reg [15:0] drift_cnt = 0;
+reg [15:0] drift_cnt ;
 
 reg [47:0] temp;
 
-reg pps_reg = 0;
+reg pps_reg ;
 
 assign input_adj_active = adj_active_reg;
 

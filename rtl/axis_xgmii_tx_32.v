@@ -121,7 +121,7 @@ localparam [3:0]
     STATE_IFG = 4'd7,
     STATE_WAIT_END = 4'd8;
 
-reg [3:0] state_reg = STATE_IDLE, state_next;
+reg [3:0] state_reg , state_next;
 
 // datapath control signals
 reg reset_crc;
@@ -129,8 +129,8 @@ reg update_crc;
 
 reg [DATA_WIDTH-1:0] s_axis_tdata_masked;
 
-reg [DATA_WIDTH-1:0] s_tdata_reg ={DATA_WIDTH{1'b0}}, s_tdata_next;
-reg [KEEP_WIDTH-1:0] s_tkeep_reg = {KEEP_WIDTH{1'b0}}, s_tkeep_next;
+reg [DATA_WIDTH-1:0] s_tdata_reg , s_tdata_next;
+reg [KEEP_WIDTH-1:0] s_tkeep_reg , s_tkeep_next;
 
 reg [DATA_WIDTH-1:0] fcs_output_txd_0;
 reg [DATA_WIDTH-1:0] fcs_output_txd_1;
@@ -141,29 +141,29 @@ reg [7:0] ifg_offset;
 
 reg extra_cycle;
 
-reg [15:0] frame_ptr_reg = 16'd0, frame_ptr_next;
+reg [15:0] frame_ptr_reg , frame_ptr_next;
 
-reg [7:0] ifg_count_reg = 8'd0, ifg_count_next;
-reg [1:0] deficit_idle_count_reg = 2'd0, deficit_idle_count_next;
+reg [7:0] ifg_count_reg , ifg_count_next;
+reg [1:0] deficit_idle_count_reg , deficit_idle_count_next;
 
-reg s_axis_tready_reg = 1'b0, s_axis_tready_next;
+reg s_axis_tready_reg , s_axis_tready_next;
 
-reg [PTP_TS_WIDTH-1:0] m_axis_ptp_ts_reg = 0, m_axis_ptp_ts_next;
-reg [PTP_TAG_WIDTH-1:0] m_axis_ptp_ts_tag_reg = 0, m_axis_ptp_ts_tag_next;
-reg m_axis_ptp_ts_valid_reg = 1'b0, m_axis_ptp_ts_valid_next;
+reg [PTP_TS_WIDTH-1:0] m_axis_ptp_ts_reg , m_axis_ptp_ts_next;
+reg [PTP_TAG_WIDTH-1:0] m_axis_ptp_ts_tag_reg , m_axis_ptp_ts_tag_next;
+reg m_axis_ptp_ts_valid_reg , m_axis_ptp_ts_valid_next;
 
-reg [31:0] crc_state = 32'hFFFFFFFF;
+reg [31:0] crc_state ;
 
 wire [31:0] crc_next0;
 wire [31:0] crc_next1;
 wire [31:0] crc_next2;
 wire [31:0] crc_next3;
 
-reg [DATA_WIDTH-1:0] xgmii_txd_reg = {CTRL_WIDTH{XGMII_IDLE}}, xgmii_txd_next;
-reg [CTRL_WIDTH-1:0] xgmii_txc_reg = {CTRL_WIDTH{1'b1}}, xgmii_txc_next;
+reg [DATA_WIDTH-1:0] xgmii_txd_reg , xgmii_txd_next;
+reg [CTRL_WIDTH-1:0] xgmii_txc_reg , xgmii_txc_next;
 
-reg start_packet_reg = 1'b0, start_packet_next;
-reg error_underflow_reg = 1'b0, error_underflow_next;
+reg start_packet_reg , start_packet_next;
+reg error_underflow_reg , error_underflow_next;
 
 assign s_axis_tready = s_axis_tready_reg;
 

@@ -73,16 +73,16 @@ initial begin
     end
 end
 
-reg [57:0] scrambler_state_reg = {58{1'b1}};
+reg [57:0] scrambler_state_reg ;
 wire [57:0] scrambler_state;
 wire [DATA_WIDTH-1:0] scrambled_data;
 
-reg [30:0] prbs31_state_reg = 31'h7fffffff;
+reg [30:0] prbs31_state_reg ;
 wire [30:0] prbs31_state;
 wire [DATA_WIDTH+HDR_WIDTH-1:0] prbs31_data;
 
-reg [DATA_WIDTH-1:0] serdes_tx_data_reg = {DATA_WIDTH{1'b0}};
-reg [HDR_WIDTH-1:0] serdes_tx_hdr_reg = {HDR_WIDTH{1'b0}};
+reg [DATA_WIDTH-1:0] serdes_tx_data_reg ;
+reg [HDR_WIDTH-1:0] serdes_tx_hdr_reg ;
 
 wire [DATA_WIDTH-1:0] serdes_tx_data_int;
 wire [HDR_WIDTH-1:0]  serdes_tx_hdr_int;

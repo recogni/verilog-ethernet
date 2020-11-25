@@ -53,7 +53,7 @@ module ptp_ts_extract #
     output wire                   m_axis_ts_valid
 );
 
-reg frame_reg = 1'b0;
+reg frame_reg ;
 
 assign m_axis_ts = s_axis_tuser >> TS_OFFSET;
 assign m_axis_ts_valid = s_axis_tvalid && !frame_reg;

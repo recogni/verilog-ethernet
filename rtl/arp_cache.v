@@ -62,31 +62,31 @@ module arp_cache #(
     input  wire        clear_cache
 );
 
-reg mem_write = 0;
-reg store_query = 0;
-reg store_write = 0;
+reg mem_write ;
+reg store_query ;
+reg store_write ;
 
-reg query_ip_valid_reg = 0, query_ip_valid_next;
-reg [31:0] query_ip_reg = 0;
-reg write_ip_valid_reg = 0, write_ip_valid_next;
-reg [31:0] write_ip_reg = 0;
-reg [47:0] write_mac_reg = 0;
-reg clear_cache_reg = 0, clear_cache_next;
+reg query_ip_valid_reg , query_ip_valid_next;
+reg [31:0] query_ip_reg ;
+reg write_ip_valid_reg , write_ip_valid_next;
+reg [31:0] write_ip_reg ;
+reg [47:0] write_mac_reg ;
+reg clear_cache_reg , clear_cache_next;
 
-reg [CACHE_ADDR_WIDTH-1:0] wr_ptr_reg = {CACHE_ADDR_WIDTH{1'b0}}, wr_ptr_next;
-reg [CACHE_ADDR_WIDTH-1:0] rd_ptr_reg = {CACHE_ADDR_WIDTH{1'b0}}, rd_ptr_next;
+reg [CACHE_ADDR_WIDTH-1:0] wr_ptr_reg , wr_ptr_next;
+reg [CACHE_ADDR_WIDTH-1:0] rd_ptr_reg , rd_ptr_next;
 
 reg valid_mem[(2**CACHE_ADDR_WIDTH)-1:0];
 reg [31:0] ip_addr_mem[(2**CACHE_ADDR_WIDTH)-1:0];
 reg [47:0] mac_addr_mem[(2**CACHE_ADDR_WIDTH)-1:0];
 
-reg query_request_ready_reg = 0, query_request_ready_next;
+reg query_request_ready_reg , query_request_ready_next;
 
-reg query_response_valid_reg = 0, query_response_valid_next;
-reg query_response_error_reg = 0, query_response_error_next;
-reg [47:0] query_response_mac_reg = 0;
+reg query_response_valid_reg , query_response_valid_next;
+reg query_response_error_reg , query_response_error_next;
+reg [47:0] query_response_mac_reg ;
 
-reg write_request_ready_reg = 0, write_request_ready_next;
+reg write_request_ready_reg , write_request_ready_next;
 
 wire [31:0] query_request_hash;
 wire [31:0] write_request_hash;
