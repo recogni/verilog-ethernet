@@ -25,6 +25,7 @@ verilog-ethernet:
     -  rtl/eth_mac_10g.v
     -  rtl/eth_mac_1g_fifo.v
     -  rtl/eth_mac_1g_gmii_fifo.v
+    -  rtl/eth_mac_1g_gmii_fifo_length.v
     -  rtl/eth_mac_1g_gmii.v
     -  rtl/eth_mac_1g_rgmii_fifo.v
     -  rtl/eth_mac_1g_rgmii.v
