@@ -358,13 +358,18 @@ localparam int unsigned ETH_MAX_PACKET_LENGTH = 1522;
 localparam int unsigned LENGTH_WIDTH          = $clog2(ETH_MAX_PACKET_LENGTH);
 
 logic [LENGTH_WIDTH-1:0] length_counter;
+logic rx_fifo_push = rx_fifo_axis_tvalid;
+logic rx_fifo_push_last = rx_fifo_push && rx_fifo_axis_tlast;
+
+// bad frame is encoded in the user bits of the rx fifo
+logic rx_fifo_push_last_good = rx_fifo_push_last && !rx_fifo_axis_tuser;
 
 always_ff @(posedge rx_clk or negedge rx_rst) begin
    if (rx_rst == '0) begin
     length_counter <= '0;   
    end else begin
-      length_counter <= rx_fifo_axis_tlast ? '0 :
-                        rx_fifo_axis_tvalid ? length_counter + { {(LENGTH_WIDTH-1){1'b0}}, 1'b1 } :
+      length_counter <= rx_fifo_push_last ?  '0 : // clear on last byte
+                        rx_fifo_push ? length_counter + { {(LENGTH_WIDTH-1){1'b0}}, 1'b1 } : // increment on anything but last
                         length_counter;
    end
 end
@@ -387,7 +392,7 @@ length_fifo (
     .s_rst(rx_rst),
     .s_axis_tdata(length_counter),
     .s_axis_tkeep(0),
-    .s_axis_tvalid(tx_fifo_good_frame),
+    .s_axis_tvalid(rx_fifo_push_last_good),
     .s_axis_tready(),
     .s_axis_tlast(1'b1),
     .s_axis_tid(0),
