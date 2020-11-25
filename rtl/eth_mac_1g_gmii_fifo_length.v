@@ -358,19 +358,24 @@ localparam int unsigned ETH_MAX_PACKET_LENGTH = 1522;
 localparam int unsigned LENGTH_WIDTH          = $clog2(ETH_MAX_PACKET_LENGTH);
 
 logic [LENGTH_WIDTH-1:0] length_counter;
-logic rx_fifo_push = rx_fifo_axis_tvalid;
-logic rx_fifo_push_last = rx_fifo_push && rx_fifo_axis_tlast;
+
+logic rx_fifo_push;
+assign rx_fifo_push = rx_fifo_axis_tvalid;
+
+logic rx_fifo_push_last;
+assign rx_fifo_push_last = rx_fifo_push && rx_fifo_axis_tlast;
 
 // bad frame is encoded in the user bits of the rx fifo
-logic rx_fifo_push_last_good = rx_fifo_push_last && !rx_fifo_axis_tuser;
+logic rx_fifo_push_last_good;
+assign rx_fifo_push_last_good = rx_fifo_push_last && !rx_fifo_axis_tuser;
 
 always_ff @(posedge rx_clk or negedge rx_rst) begin
-   if (rx_rst == '0) begin
-    length_counter <= '0;   
+   if (rx_rst == '1) begin
+        length_counter <= '0;   
    end else begin
-      length_counter <= rx_fifo_push_last ?  '0 : // clear on last byte
-                        rx_fifo_push ? length_counter + { {(LENGTH_WIDTH-1){1'b0}}, 1'b1 } : // increment on anything but last
-                        length_counter;
+        length_counter <= rx_fifo_push_last ?  '0 : // clear on last byte
+                            rx_fifo_push ? length_counter + { {(LENGTH_WIDTH-1){1'b0}}, 1'b1 } : // increment on anything but last
+                            length_counter;
    end
 end
 
@@ -384,7 +389,7 @@ axis_async_fifo_adapter #(
     .ID_ENABLE(0),
     .DEST_ENABLE(0),
     .USER_WIDTH(1),
-    .FRAME_FIFO(0),
+    .FRAME_FIFO(0)
 )
 length_fifo (
     // AXI input
@@ -413,9 +418,9 @@ length_fifo (
     .s_status_overflow(),
     .s_status_bad_frame(),
     .s_status_good_frame(),
-    .m_status_overflow('0),
-    .m_status_bad_frame('0),
-    .m_status_good_frame('0)
+    .m_status_overflow(),
+    .m_status_bad_frame(),
+    .m_status_good_frame()
 );
 
 endmodule
