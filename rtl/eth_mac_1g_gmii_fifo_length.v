@@ -363,7 +363,6 @@ always_ff @(posedge rx_clk or negedge rx_rst) begin
    if (rx_rst == '0) begin
     length_counter <= '0;   
    end else begin
-      length_counter <= rx_fifo_axis_tlast ? '0 : length_counter;
       length_counter <= rx_fifo_axis_tlast ? '0 :
                         rx_fifo_axis_tvalid ? length_counter + { {(LENGTH_WIDTH-1){1'b0}}, 1'b1 } :
                         length_counter;
