@@ -83,41 +83,41 @@ localparam [2:0]
     STATE_UPDATE_FALL_2 = 3'd4,
     STATE_WAIT_EDGE = 3'd5;
 
-reg [2:0] state_reg = STATE_IDLE, state_next;
+reg [2:0] state_reg , state_next;
 
-reg [47:0] time_s_reg = 0;
-reg [30:0] time_ns_reg = 0;
-reg [15:0] time_fns_reg = 0;
+reg [47:0] time_s_reg ;
+reg [30:0] time_ns_reg ;
+reg [15:0] time_fns_reg ;
 
-reg [47:0] next_rise_s_reg = 0, next_rise_s_next;
-reg [30:0] next_rise_ns_reg = 0, next_rise_ns_next;
-reg [15:0] next_rise_fns_reg = 0, next_rise_fns_next;
+reg [47:0] next_rise_s_reg , next_rise_s_next;
+reg [30:0] next_rise_ns_reg , next_rise_ns_next;
+reg [15:0] next_rise_fns_reg , next_rise_fns_next;
 
-reg [47:0] next_fall_s_reg = 0, next_fall_s_next;
-reg [30:0] next_fall_ns_reg = 0, next_fall_ns_next;
-reg [15:0] next_fall_fns_reg = 0, next_fall_fns_next;
+reg [47:0] next_fall_s_reg , next_fall_s_next;
+reg [30:0] next_fall_ns_reg , next_fall_ns_next;
+reg [15:0] next_fall_fns_reg , next_fall_fns_next;
 
-reg [47:0] start_s_reg = OUT_START_S;
-reg [30:0] start_ns_reg = OUT_START_NS;
-reg [15:0] start_fns_reg = OUT_START_FNS;
+reg [47:0] start_s_reg ;
+reg [30:0] start_ns_reg ;
+reg [15:0] start_fns_reg ;
 
-reg [47:0] period_s_reg = OUT_PERIOD_S;
-reg [30:0] period_ns_reg = OUT_PERIOD_NS;
-reg [15:0] period_fns_reg = OUT_PERIOD_FNS;
+reg [47:0] period_s_reg ;
+reg [30:0] period_ns_reg ;
+reg [15:0] period_fns_reg ;
 
-reg [47:0] width_s_reg = OUT_WIDTH_S;
-reg [30:0] width_ns_reg = OUT_WIDTH_NS;
-reg [15:0] width_fns_reg = OUT_WIDTH_FNS;
+reg [47:0] width_s_reg ;
+reg [30:0] width_ns_reg ;
+reg [15:0] width_fns_reg ;
 
-reg [29:0] ts_96_ns_inc_reg = 0, ts_96_ns_inc_next;
-reg [15:0] ts_96_fns_inc_reg = 0, ts_96_fns_inc_next;
-reg [30:0] ts_96_ns_ovf_reg = 0, ts_96_ns_ovf_next;
-reg [15:0] ts_96_fns_ovf_reg = 0, ts_96_fns_ovf_next;
+reg [29:0] ts_96_ns_inc_reg , ts_96_ns_inc_next;
+reg [15:0] ts_96_fns_inc_reg , ts_96_fns_inc_next;
+reg [30:0] ts_96_ns_ovf_reg , ts_96_ns_ovf_next;
+reg [15:0] ts_96_fns_ovf_reg , ts_96_fns_ovf_next;
 
-reg locked_reg = 1'b0, locked_next;
-reg error_reg = 1'b0;
-reg level_reg = 1'b0, level_next;
-reg output_reg = 1'b0, output_next;
+reg locked_reg , locked_next;
+reg error_reg ;
+reg level_reg , level_next;
+reg output_reg , output_next;
 
 assign locked = locked_reg;
 assign error = error_reg;

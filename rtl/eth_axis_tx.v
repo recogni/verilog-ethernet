@@ -106,26 +106,26 @@ transmits the complete Ethernet frame on the output AXI stream interface.
 // datapath control signals
 reg store_eth_hdr;
 
-reg send_eth_header_reg = 1'b0, send_eth_header_next;
-reg send_eth_payload_reg = 1'b0, send_eth_payload_next;
-reg [PTR_WIDTH-1:0] ptr_reg = 0, ptr_next;
+reg send_eth_header_reg , send_eth_header_next;
+reg send_eth_payload_reg , send_eth_payload_next;
+reg [PTR_WIDTH-1:0] ptr_reg , ptr_next;
 
 reg flush_save;
 reg transfer_in_save;
 
-reg [47:0] eth_dest_mac_reg = 48'd0;
-reg [47:0] eth_src_mac_reg = 48'd0;
-reg [15:0] eth_type_reg = 16'd0;
+reg [47:0] eth_dest_mac_reg ;
+reg [47:0] eth_src_mac_reg ;
+reg [15:0] eth_type_reg ;
 
-reg s_eth_hdr_ready_reg = 1'b0, s_eth_hdr_ready_next;
-reg s_eth_payload_axis_tready_reg = 1'b0, s_eth_payload_axis_tready_next;
+reg s_eth_hdr_ready_reg , s_eth_hdr_ready_next;
+reg s_eth_payload_axis_tready_reg , s_eth_payload_axis_tready_next;
 
-reg busy_reg = 1'b0;
+reg busy_reg ;
 
-reg [DATA_WIDTH-1:0] save_eth_payload_axis_tdata_reg = {DATA_WIDTH{1'b0}};
-reg [KEEP_WIDTH-1:0] save_eth_payload_axis_tkeep_reg = {KEEP_WIDTH{1'b0}};
-reg save_eth_payload_axis_tlast_reg = 1'b0;
-reg save_eth_payload_axis_tuser_reg = 1'b0;
+reg [DATA_WIDTH-1:0] save_eth_payload_axis_tdata_reg ;
+reg [KEEP_WIDTH-1:0] save_eth_payload_axis_tkeep_reg ;
+reg save_eth_payload_axis_tlast_reg ;
+reg save_eth_payload_axis_tuser_reg ;
 
 reg [DATA_WIDTH-1:0] shift_eth_payload_axis_tdata;
 reg [KEEP_WIDTH-1:0] shift_eth_payload_axis_tkeep;
@@ -133,13 +133,13 @@ reg shift_eth_payload_axis_tvalid;
 reg shift_eth_payload_axis_tlast;
 reg shift_eth_payload_axis_tuser;
 reg shift_eth_payload_axis_input_tready;
-reg shift_eth_payload_axis_extra_cycle_reg = 1'b0;
+reg shift_eth_payload_axis_extra_cycle_reg ;
 
 // internal datapath
 reg [DATA_WIDTH-1:0] m_axis_tdata_int;
 reg [KEEP_WIDTH-1:0] m_axis_tkeep_int;
 reg                  m_axis_tvalid_int;
-reg                  m_axis_tready_int_reg = 1'b0;
+reg                  m_axis_tready_int_reg ;
 reg                  m_axis_tlast_int;
 reg                  m_axis_tuser_int;
 wire                 m_axis_tready_int_early;
@@ -311,17 +311,17 @@ always @(posedge clk) begin
 end
 
 // output datapath logic
-reg [DATA_WIDTH-1:0] m_axis_tdata_reg = {DATA_WIDTH{1'b0}};
-reg [KEEP_WIDTH-1:0] m_axis_tkeep_reg = {KEEP_WIDTH{1'b0}};
-reg                  m_axis_tvalid_reg = 1'b0, m_axis_tvalid_next;
-reg                  m_axis_tlast_reg = 1'b0;
-reg                  m_axis_tuser_reg = 1'b0;
+reg [DATA_WIDTH-1:0] m_axis_tdata_reg ;
+reg [KEEP_WIDTH-1:0] m_axis_tkeep_reg ;
+reg                  m_axis_tvalid_reg , m_axis_tvalid_next;
+reg                  m_axis_tlast_reg ;
+reg                  m_axis_tuser_reg ;
 
-reg [DATA_WIDTH-1:0] temp_m_axis_tdata_reg = {DATA_WIDTH{1'b0}};
-reg [KEEP_WIDTH-1:0] temp_m_axis_tkeep_reg = {KEEP_WIDTH{1'b0}};
-reg                  temp_m_axis_tvalid_reg = 1'b0, temp_m_axis_tvalid_next;
-reg                  temp_m_axis_tlast_reg = 1'b0;
-reg                  temp_m_axis_tuser_reg = 1'b0;
+reg [DATA_WIDTH-1:0] temp_m_axis_tdata_reg ;
+reg [KEEP_WIDTH-1:0] temp_m_axis_tkeep_reg ;
+reg                  temp_m_axis_tvalid_reg , temp_m_axis_tvalid_next;
+reg                  temp_m_axis_tlast_reg ;
+reg                  temp_m_axis_tuser_reg ;
 
 // datapath control
 reg store_axis_int_to_output;

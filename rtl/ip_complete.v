@@ -199,9 +199,9 @@ wire s_select_ip = (s_eth_type == 16'h0800);
 wire s_select_arp = (s_eth_type == 16'h0806);
 wire s_select_none = !(s_select_ip || s_select_arp);
 
-reg s_select_ip_reg = 1'b0;
-reg s_select_arp_reg = 1'b0;
-reg s_select_none_reg = 1'b0;
+reg s_select_ip_reg ;
+reg s_select_arp_reg ;
+reg s_select_none_reg ;
 
 always @(posedge clk) begin
     if (rst) begin

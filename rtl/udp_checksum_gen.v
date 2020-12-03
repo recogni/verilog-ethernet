@@ -148,40 +148,40 @@ localparam [2:0]
     STATE_SUM_PAYLOAD = 3'd4,
     STATE_FINISH_SUM = 3'd5;
 
-reg [2:0] state_reg = STATE_IDLE, state_next;
+reg [2:0] state_reg , state_next;
 
 // datapath control signals
 reg store_udp_hdr;
 reg shift_payload_in;
 reg [31:0] checksum_part;
 
-reg [15:0] frame_ptr_reg = 16'd0, frame_ptr_next;
+reg [15:0] frame_ptr_reg , frame_ptr_next;
 
-reg [31:0] checksum_reg = 32'd0, checksum_next;
+reg [31:0] checksum_reg , checksum_next;
 
-reg [47:0] eth_dest_mac_reg = 48'd0;
-reg [47:0] eth_src_mac_reg = 48'd0;
-reg [15:0] eth_type_reg = 16'd0;
-reg [3:0]  ip_version_reg = 4'd0;
-reg [3:0]  ip_ihl_reg = 4'd0;
-reg [5:0]  ip_dscp_reg = 6'd0;
-reg [1:0]  ip_ecn_reg = 2'd0;
-reg [15:0] ip_identification_reg = 16'd0;
-reg [2:0]  ip_flags_reg = 3'd0;
-reg [12:0] ip_fragment_offset_reg = 13'd0;
-reg [7:0]  ip_ttl_reg = 8'd0;
-reg [15:0] ip_header_checksum_reg = 16'd0;
-reg [31:0] ip_source_ip_reg = 32'd0;
-reg [31:0] ip_dest_ip_reg = 32'd0;
-reg [15:0] udp_source_port_reg = 16'd0;
-reg [15:0] udp_dest_port_reg = 16'd0;
+reg [47:0] eth_dest_mac_reg ;
+reg [47:0] eth_src_mac_reg ;
+reg [15:0] eth_type_reg ;
+reg [3:0]  ip_version_reg ;
+reg [3:0]  ip_ihl_reg ;
+reg [5:0]  ip_dscp_reg ;
+reg [1:0]  ip_ecn_reg ;
+reg [15:0] ip_identification_reg ;
+reg [2:0]  ip_flags_reg ;
+reg [12:0] ip_fragment_offset_reg ;
+reg [7:0]  ip_ttl_reg ;
+reg [15:0] ip_header_checksum_reg ;
+reg [31:0] ip_source_ip_reg ;
+reg [31:0] ip_dest_ip_reg ;
+reg [15:0] udp_source_port_reg ;
+reg [15:0] udp_dest_port_reg ;
 
-reg hdr_valid_reg = 0, hdr_valid_next;
+reg hdr_valid_reg , hdr_valid_next;
 
-reg s_udp_hdr_ready_reg = 1'b0, s_udp_hdr_ready_next;
-reg s_udp_payload_axis_tready_reg = 1'b0, s_udp_payload_axis_tready_next;
+reg s_udp_hdr_ready_reg , s_udp_hdr_ready_next;
+reg s_udp_payload_axis_tready_reg , s_udp_payload_axis_tready_next;
 
-reg busy_reg = 1'b0;
+reg busy_reg ;
 
 /*
  * UDP Payload FIFO
@@ -251,8 +251,8 @@ assign m_udp_payload_axis_tuser = m_udp_payload_fifo_tuser;
 /*
  * UDP Header FIFO
  */
-reg [HEADER_FIFO_ADDR_WIDTH:0] header_fifo_wr_ptr_reg = {HEADER_FIFO_ADDR_WIDTH+1{1'b0}}, header_fifo_wr_ptr_next;
-reg [HEADER_FIFO_ADDR_WIDTH:0] header_fifo_rd_ptr_reg = {HEADER_FIFO_ADDR_WIDTH+1{1'b0}}, header_fifo_rd_ptr_next;
+reg [HEADER_FIFO_ADDR_WIDTH:0] header_fifo_wr_ptr_reg , header_fifo_wr_ptr_next;
+reg [HEADER_FIFO_ADDR_WIDTH:0] header_fifo_rd_ptr_reg , header_fifo_rd_ptr_next;
 
 reg [47:0] eth_dest_mac_mem[(2**HEADER_FIFO_ADDR_WIDTH)-1:0];
 reg [47:0] eth_src_mac_mem[(2**HEADER_FIFO_ADDR_WIDTH)-1:0];
@@ -273,26 +273,26 @@ reg [15:0] udp_dest_port_mem[(2**HEADER_FIFO_ADDR_WIDTH)-1:0];
 reg [15:0] udp_length_mem[(2**HEADER_FIFO_ADDR_WIDTH)-1:0];
 reg [15:0] udp_checksum_mem[(2**HEADER_FIFO_ADDR_WIDTH)-1:0];
 
-reg [47:0] m_eth_dest_mac_reg = 48'd0;
-reg [47:0] m_eth_src_mac_reg = 48'd0;
-reg [15:0] m_eth_type_reg = 16'd0;
-reg [3:0]  m_ip_version_reg = 4'd0;
-reg [3:0]  m_ip_ihl_reg = 4'd0;
-reg [5:0]  m_ip_dscp_reg = 6'd0;
-reg [1:0]  m_ip_ecn_reg = 2'd0;
-reg [15:0] m_ip_identification_reg = 16'd0;
-reg [2:0]  m_ip_flags_reg = 3'd0;
-reg [12:0] m_ip_fragment_offset_reg = 13'd0;
-reg [7:0]  m_ip_ttl_reg = 8'd0;
-reg [15:0] m_ip_header_checksum_reg = 16'd0;
-reg [31:0] m_ip_source_ip_reg = 32'd0;
-reg [31:0] m_ip_dest_ip_reg = 32'd0;
-reg [15:0] m_udp_source_port_reg = 16'd0;
-reg [15:0] m_udp_dest_port_reg = 16'd0;
-reg [15:0] m_udp_length_reg = 16'd0;
-reg [15:0] m_udp_checksum_reg = 16'd0;
+reg [47:0] m_eth_dest_mac_reg ;
+reg [47:0] m_eth_src_mac_reg ;
+reg [15:0] m_eth_type_reg ;
+reg [3:0]  m_ip_version_reg ;
+reg [3:0]  m_ip_ihl_reg ;
+reg [5:0]  m_ip_dscp_reg ;
+reg [1:0]  m_ip_ecn_reg ;
+reg [15:0] m_ip_identification_reg ;
+reg [2:0]  m_ip_flags_reg ;
+reg [12:0] m_ip_fragment_offset_reg ;
+reg [7:0]  m_ip_ttl_reg ;
+reg [15:0] m_ip_header_checksum_reg ;
+reg [31:0] m_ip_source_ip_reg ;
+reg [31:0] m_ip_dest_ip_reg ;
+reg [15:0] m_udp_source_port_reg ;
+reg [15:0] m_udp_dest_port_reg ;
+reg [15:0] m_udp_length_reg ;
+reg [15:0] m_udp_checksum_reg ;
 
-reg m_udp_hdr_valid_reg = 1'b0, m_udp_hdr_valid_next;
+reg m_udp_hdr_valid_reg , m_udp_hdr_valid_next;
 
 // full when first MSB different but rest same
 wire header_fifo_full = ((header_fifo_wr_ptr_reg[HEADER_FIFO_ADDR_WIDTH] != header_fifo_rd_ptr_reg[HEADER_FIFO_ADDR_WIDTH]) &&

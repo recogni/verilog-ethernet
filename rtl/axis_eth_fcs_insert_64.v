@@ -70,7 +70,7 @@ localparam [1:0]
     STATE_PAD = 2'd2,
     STATE_FCS = 2'd3;
 
-reg [1:0] state_reg = STATE_IDLE, state_next;
+reg [1:0] state_reg , state_next;
 
 // datapath control signals
 reg reset_crc;
@@ -86,16 +86,16 @@ reg [63:0] fcs_m_tdata_1;
 reg [7:0] fcs_m_tkeep_0;
 reg [7:0] fcs_m_tkeep_1;
 
-reg [15:0] frame_ptr_reg = 16'd0, frame_ptr_next;
+reg [15:0] frame_ptr_reg , frame_ptr_next;
 
-reg [63:0] last_cycle_tdata_reg = 64'd0, last_cycle_tdata_next;
-reg [7:0] last_cycle_tkeep_reg = 8'd0, last_cycle_tkeep_next;
+reg [63:0] last_cycle_tdata_reg , last_cycle_tdata_next;
+reg [7:0] last_cycle_tkeep_reg , last_cycle_tkeep_next;
 
-reg busy_reg = 1'b0;
+reg busy_reg ;
 
-reg s_axis_tready_reg = 1'b0, s_axis_tready_next;
+reg s_axis_tready_reg , s_axis_tready_next;
 
-reg [31:0] crc_state = 32'hFFFFFFFF;
+reg [31:0] crc_state ;
 
 wire [31:0] crc_next0;
 wire [31:0] crc_next1;
@@ -110,7 +110,7 @@ wire [31:0] crc_next7;
 reg [63:0] m_axis_tdata_int;
 reg [7:0]  m_axis_tkeep_int;
 reg        m_axis_tvalid_int;
-reg        m_axis_tready_int_reg = 1'b0;
+reg        m_axis_tready_int_reg ;
 reg        m_axis_tlast_int;
 reg        m_axis_tuser_int;
 wire       m_axis_tready_int_early;
@@ -628,17 +628,17 @@ always @(posedge clk) begin
 end
 
 // output datapath logic
-reg [63:0] m_axis_tdata_reg = 64'd0;
-reg [7:0]  m_axis_tkeep_reg = 8'd0;
-reg        m_axis_tvalid_reg = 1'b0, m_axis_tvalid_next;
-reg        m_axis_tlast_reg = 1'b0;
-reg        m_axis_tuser_reg = 1'b0;
+reg [63:0] m_axis_tdata_reg ;
+reg [7:0]  m_axis_tkeep_reg ;
+reg        m_axis_tvalid_reg , m_axis_tvalid_next;
+reg        m_axis_tlast_reg ;
+reg        m_axis_tuser_reg ;
 
-reg [63:0] temp_m_axis_tdata_reg = 64'd0;
-reg [7:0]  temp_m_axis_tkeep_reg = 8'd0;
-reg        temp_m_axis_tvalid_reg = 1'b0, temp_m_axis_tvalid_next;
-reg        temp_m_axis_tlast_reg = 1'b0;
-reg        temp_m_axis_tuser_reg = 1'b0;
+reg [63:0] temp_m_axis_tdata_reg ;
+reg [7:0]  temp_m_axis_tkeep_reg ;
+reg        temp_m_axis_tvalid_reg , temp_m_axis_tvalid_next;
+reg        temp_m_axis_tlast_reg ;
+reg        temp_m_axis_tuser_reg ;
 
 // datapath control
 reg store_axis_int_to_output;

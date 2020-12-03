@@ -129,10 +129,10 @@ localparam [7:0]
 reg [DATA_WIDTH-1:0] decoded_ctrl;
 reg [CTRL_WIDTH-1:0] decode_err;
 
-reg [DATA_WIDTH-1:0] xgmii_rxd_reg = {DATA_WIDTH{1'b0}}, xgmii_rxd_next;
-reg [CTRL_WIDTH-1:0] xgmii_rxc_reg = {CTRL_WIDTH{1'b0}}, xgmii_rxc_next;
+reg [DATA_WIDTH-1:0] xgmii_rxd_reg , xgmii_rxd_next;
+reg [CTRL_WIDTH-1:0] xgmii_rxc_reg , xgmii_rxc_next;
 
-reg rx_bad_block_reg = 1'b0, rx_bad_block_next;
+reg rx_bad_block_reg , rx_bad_block_next;
 
 assign xgmii_rxd = xgmii_rxd_reg;
 assign xgmii_rxc = xgmii_rxc_reg;

@@ -83,9 +83,9 @@ rx_ssio_sdr_inst (
 );
 
 (* IOB = "TRUE" *)
-reg [3:0] phy_mii_txd_reg = 4'd0;
+reg [3:0] phy_mii_txd_reg ;
 (* IOB = "TRUE" *)
-reg phy_mii_tx_en_reg = 1'b0, phy_mii_tx_er_reg = 1'b0;
+reg phy_mii_tx_en_reg , phy_mii_tx_er_reg ;
 
 assign phy_mii_txd = phy_mii_txd_reg;
 assign phy_mii_tx_en = phy_mii_tx_en_reg;
@@ -108,7 +108,7 @@ end
 endgenerate
 
 // reset sync
-reg [3:0] tx_rst_reg = 4'hf;
+reg [3:0] tx_rst_reg ;
 assign mac_mii_tx_rst = tx_rst_reg[0];
 
 always @(posedge mac_mii_tx_clk or posedge rst) begin
@@ -119,7 +119,7 @@ always @(posedge mac_mii_tx_clk or posedge rst) begin
     end
 end
 
-reg [3:0] rx_rst_reg = 4'hf;
+reg [3:0] rx_rst_reg ;
 assign mac_mii_rx_rst = rx_rst_reg[0];
 
 always @(posedge mac_mii_rx_clk or posedge rst) begin

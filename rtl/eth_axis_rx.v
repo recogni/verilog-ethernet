@@ -104,27 +104,27 @@ with the payload in a separate AXI stream.
 
 */
 
-reg read_eth_header_reg = 1'b1, read_eth_header_next;
-reg read_eth_payload_reg = 1'b0, read_eth_payload_next;
-reg [PTR_WIDTH-1:0] ptr_reg = 0, ptr_next;
+reg read_eth_header_reg , read_eth_header_next;
+reg read_eth_payload_reg , read_eth_payload_next;
+reg [PTR_WIDTH-1:0] ptr_reg , ptr_next;
 
 reg flush_save;
 reg transfer_in_save;
 
-reg s_axis_tready_reg = 1'b0, s_axis_tready_next;
+reg s_axis_tready_reg , s_axis_tready_next;
 
-reg m_eth_hdr_valid_reg = 1'b0, m_eth_hdr_valid_next;
-reg [47:0] m_eth_dest_mac_reg = 48'd0, m_eth_dest_mac_next;
-reg [47:0] m_eth_src_mac_reg = 48'd0, m_eth_src_mac_next;
-reg [15:0] m_eth_type_reg = 16'd0, m_eth_type_next;
+reg m_eth_hdr_valid_reg , m_eth_hdr_valid_next;
+reg [47:0] m_eth_dest_mac_reg , m_eth_dest_mac_next;
+reg [47:0] m_eth_src_mac_reg , m_eth_src_mac_next;
+reg [15:0] m_eth_type_reg , m_eth_type_next;
 
-reg busy_reg = 1'b0;
-reg error_header_early_termination_reg = 1'b0, error_header_early_termination_next;
+reg busy_reg ;
+reg error_header_early_termination_reg , error_header_early_termination_next;
 
-reg [DATA_WIDTH-1:0] save_axis_tdata_reg = 64'd0;
-reg [KEEP_WIDTH-1:0] save_axis_tkeep_reg = 8'd0;
-reg save_axis_tlast_reg = 1'b0;
-reg save_axis_tuser_reg = 1'b0;
+reg [DATA_WIDTH-1:0] save_axis_tdata_reg ;
+reg [KEEP_WIDTH-1:0] save_axis_tkeep_reg ;
+reg save_axis_tlast_reg ;
+reg save_axis_tuser_reg ;
 
 reg [DATA_WIDTH-1:0] shift_axis_tdata;
 reg [KEEP_WIDTH-1:0] shift_axis_tkeep;
@@ -132,13 +132,13 @@ reg shift_axis_tvalid;
 reg shift_axis_tlast;
 reg shift_axis_tuser;
 reg shift_axis_input_tready;
-reg shift_axis_extra_cycle_reg = 1'b0;
+reg shift_axis_extra_cycle_reg ;
 
 // internal datapath
 reg [DATA_WIDTH-1:0] m_eth_payload_axis_tdata_int;
 reg [KEEP_WIDTH-1:0] m_eth_payload_axis_tkeep_int;
 reg                  m_eth_payload_axis_tvalid_int;
-reg                  m_eth_payload_axis_tready_int_reg = 1'b0;
+reg                  m_eth_payload_axis_tready_int_reg ;
 reg                  m_eth_payload_axis_tlast_int;
 reg                  m_eth_payload_axis_tuser_int;
 wire                 m_eth_payload_axis_tready_int_early;
@@ -308,17 +308,17 @@ always @(posedge clk) begin
 end
 
 // output datapath logic
-reg [DATA_WIDTH-1:0] m_eth_payload_axis_tdata_reg = {DATA_WIDTH{1'b0}};
-reg [KEEP_WIDTH-1:0] m_eth_payload_axis_tkeep_reg = {KEEP_WIDTH{1'b0}};
-reg                  m_eth_payload_axis_tvalid_reg = 1'b0, m_eth_payload_axis_tvalid_next;
-reg                  m_eth_payload_axis_tlast_reg = 1'b0;
-reg                  m_eth_payload_axis_tuser_reg = 1'b0;
+reg [DATA_WIDTH-1:0] m_eth_payload_axis_tdata_reg ;
+reg [KEEP_WIDTH-1:0] m_eth_payload_axis_tkeep_reg ;
+reg                  m_eth_payload_axis_tvalid_reg , m_eth_payload_axis_tvalid_next;
+reg                  m_eth_payload_axis_tlast_reg ;
+reg                  m_eth_payload_axis_tuser_reg ;
 
-reg [DATA_WIDTH-1:0] temp_m_eth_payload_axis_tdata_reg = {DATA_WIDTH{1'b0}};
-reg [KEEP_WIDTH-1:0] temp_m_eth_payload_axis_tkeep_reg = {KEEP_WIDTH{1'b0}};
-reg                  temp_m_eth_payload_axis_tvalid_reg = 1'b0, temp_m_eth_payload_axis_tvalid_next;
-reg                  temp_m_eth_payload_axis_tlast_reg = 1'b0;
-reg                  temp_m_eth_payload_axis_tuser_reg = 1'b0;
+reg [DATA_WIDTH-1:0] temp_m_eth_payload_axis_tdata_reg ;
+reg [KEEP_WIDTH-1:0] temp_m_eth_payload_axis_tkeep_reg ;
+reg                  temp_m_eth_payload_axis_tvalid_reg , temp_m_eth_payload_axis_tvalid_next;
+reg                  temp_m_eth_payload_axis_tlast_reg ;
+reg                  temp_m_eth_payload_axis_tuser_reg ;
 
 // datapath control
 reg store_eth_payload_int_to_output;

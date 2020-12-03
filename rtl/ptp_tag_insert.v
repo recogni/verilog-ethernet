@@ -69,8 +69,8 @@ module ptp_tag_insert #
     output wire                   s_axis_tag_ready
 );
 
-reg [TAG_WIDTH-1:0] tag_reg = {TAG_WIDTH{1'b0}};
-reg tag_valid_reg = 1'b0;
+reg [TAG_WIDTH-1:0] tag_reg ;
+reg tag_valid_reg ;
 
 reg [USER_WIDTH-1:0] user;
 

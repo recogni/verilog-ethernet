@@ -90,24 +90,24 @@ module eth_demux #
 
 parameter CL_M_COUNT = $clog2(M_COUNT);
 
-reg [CL_M_COUNT-1:0] select_reg = {CL_M_COUNT{1'b0}}, select_ctl, select_next;
-reg drop_reg = 1'b0, drop_ctl, drop_next;
-reg frame_reg = 1'b0, frame_ctl, frame_next;
+reg [CL_M_COUNT-1:0] select_reg , select_ctl, select_next;
+reg drop_reg , drop_ctl, drop_next;
+reg frame_reg , frame_ctl, frame_next;
 
-reg s_eth_hdr_ready_reg = 1'b0, s_eth_hdr_ready_next;
+reg s_eth_hdr_ready_reg , s_eth_hdr_ready_next;
 
-reg s_eth_payload_axis_tready_reg = 1'b0, s_eth_payload_axis_tready_next;
+reg s_eth_payload_axis_tready_reg , s_eth_payload_axis_tready_next;
 
-reg [M_COUNT-1:0] m_eth_hdr_valid_reg = 0, m_eth_hdr_valid_next;
-reg [47:0] m_eth_dest_mac_reg = 48'd0, m_eth_dest_mac_next;
-reg [47:0] m_eth_src_mac_reg = 48'd0, m_eth_src_mac_next;
-reg [15:0] m_eth_type_reg = 16'd0, m_eth_type_next;
+reg [M_COUNT-1:0] m_eth_hdr_valid_reg , m_eth_hdr_valid_next;
+reg [47:0] m_eth_dest_mac_reg , m_eth_dest_mac_next;
+reg [47:0] m_eth_src_mac_reg , m_eth_src_mac_next;
+reg [15:0] m_eth_type_reg , m_eth_type_next;
 
 // internal datapath
 reg  [DATA_WIDTH-1:0] m_eth_payload_axis_tdata_int;
 reg  [KEEP_WIDTH-1:0] m_eth_payload_axis_tkeep_int;
 reg  [M_COUNT-1:0]    m_eth_payload_axis_tvalid_int;
-reg                   m_eth_payload_axis_tready_int_reg = 1'b0;
+reg                   m_eth_payload_axis_tready_int_reg ;
 reg                   m_eth_payload_axis_tlast_int;
 reg  [ID_WIDTH-1:0]   m_eth_payload_axis_tid_int;
 reg  [DEST_WIDTH-1:0] m_eth_payload_axis_tdest_int;
@@ -204,21 +204,21 @@ always @(posedge clk) begin
 end
 
 // output datapath logic
-reg [DATA_WIDTH-1:0] m_eth_payload_axis_tdata_reg  = {DATA_WIDTH{1'b0}};
-reg [KEEP_WIDTH-1:0] m_eth_payload_axis_tkeep_reg  = {KEEP_WIDTH{1'b0}};
-reg [M_COUNT-1:0]    m_eth_payload_axis_tvalid_reg = {M_COUNT{1'b0}}, m_eth_payload_axis_tvalid_next;
-reg                  m_eth_payload_axis_tlast_reg  = 1'b0;
-reg [ID_WIDTH-1:0]   m_eth_payload_axis_tid_reg    = {ID_WIDTH{1'b0}};
-reg [DEST_WIDTH-1:0] m_eth_payload_axis_tdest_reg  = {DEST_WIDTH{1'b0}};
-reg [USER_WIDTH-1:0] m_eth_payload_axis_tuser_reg  = {USER_WIDTH{1'b0}};
+reg [DATA_WIDTH-1:0] m_eth_payload_axis_tdata_reg  ;
+reg [KEEP_WIDTH-1:0] m_eth_payload_axis_tkeep_reg  ;
+reg [M_COUNT-1:0]    m_eth_payload_axis_tvalid_reg , m_eth_payload_axis_tvalid_next;
+reg                  m_eth_payload_axis_tlast_reg  ;
+reg [ID_WIDTH-1:0]   m_eth_payload_axis_tid_reg    ;
+reg [DEST_WIDTH-1:0] m_eth_payload_axis_tdest_reg  ;
+reg [USER_WIDTH-1:0] m_eth_payload_axis_tuser_reg  ;
 
-reg [DATA_WIDTH-1:0] temp_m_eth_payload_axis_tdata_reg  = {DATA_WIDTH{1'b0}};
-reg [KEEP_WIDTH-1:0] temp_m_eth_payload_axis_tkeep_reg  = {KEEP_WIDTH{1'b0}};
-reg [M_COUNT-1:0]    temp_m_eth_payload_axis_tvalid_reg = {M_COUNT{1'b0}}, temp_m_eth_payload_axis_tvalid_next;
-reg                  temp_m_eth_payload_axis_tlast_reg  = 1'b0;
-reg [ID_WIDTH-1:0]   temp_m_eth_payload_axis_tid_reg    = {ID_WIDTH{1'b0}};
-reg [DEST_WIDTH-1:0] temp_m_eth_payload_axis_tdest_reg  = {DEST_WIDTH{1'b0}};
-reg [USER_WIDTH-1:0] temp_m_eth_payload_axis_tuser_reg  = {USER_WIDTH{1'b0}};
+reg [DATA_WIDTH-1:0] temp_m_eth_payload_axis_tdata_reg  ;
+reg [KEEP_WIDTH-1:0] temp_m_eth_payload_axis_tkeep_reg  ;
+reg [M_COUNT-1:0]    temp_m_eth_payload_axis_tvalid_reg , temp_m_eth_payload_axis_tvalid_next;
+reg                  temp_m_eth_payload_axis_tlast_reg  ;
+reg [ID_WIDTH-1:0]   temp_m_eth_payload_axis_tid_reg    ;
+reg [DEST_WIDTH-1:0] temp_m_eth_payload_axis_tdest_reg  ;
+reg [USER_WIDTH-1:0] temp_m_eth_payload_axis_tuser_reg  ;
 
 // datapath control
 reg store_axis_int_to_output;

@@ -157,40 +157,40 @@ localparam [1:0]
     STATE_PAYLOAD = 2'd1,
     STATE_LAST = 2'd2;
 
-reg [1:0] state_reg = STATE_IDLE, state_next;
+reg [1:0] state_reg , state_next;
 
 // datapath control signals
 reg reset_crc;
 reg update_crc_last;
 
-reg lanes_swapped = 1'b0;
-reg [31:0] swap_data = 32'd0;
+reg lanes_swapped ;
+reg [31:0] swap_data ;
 
-reg delay_type_valid = 1'b0;
-reg [3:0] delay_type = INPUT_TYPE_IDLE;
+reg delay_type_valid ;
+reg [3:0] delay_type ;
 
-reg [DATA_WIDTH-1:0] input_data_d0 = {DATA_WIDTH{1'b0}};
-reg [DATA_WIDTH-1:0] input_data_d1 = {DATA_WIDTH{1'b0}};
-reg [DATA_WIDTH-1:0] input_data_crc = {DATA_WIDTH{1'b0}};
+reg [DATA_WIDTH-1:0] input_data_d0 ;
+reg [DATA_WIDTH-1:0] input_data_d1 ;
+reg [DATA_WIDTH-1:0] input_data_crc ;
 
-reg [3:0] input_type_d0 = INPUT_TYPE_IDLE;
-reg [3:0] input_type_d1 = INPUT_TYPE_IDLE;
+reg [3:0] input_type_d0 ;
+reg [3:0] input_type_d1 ;
 
-reg [DATA_WIDTH-1:0] m_axis_tdata_reg = {DATA_WIDTH{1'b0}}, m_axis_tdata_next;
-reg [KEEP_WIDTH-1:0] m_axis_tkeep_reg = {KEEP_WIDTH{1'b0}}, m_axis_tkeep_next;
-reg m_axis_tvalid_reg = 1'b0, m_axis_tvalid_next;
-reg m_axis_tlast_reg = 1'b0, m_axis_tlast_next;
-reg m_axis_tuser_reg = 1'b0, m_axis_tuser_next;
+reg [DATA_WIDTH-1:0] m_axis_tdata_reg , m_axis_tdata_next;
+reg [KEEP_WIDTH-1:0] m_axis_tkeep_reg , m_axis_tkeep_next;
+reg m_axis_tvalid_reg , m_axis_tvalid_next;
+reg m_axis_tlast_reg , m_axis_tlast_next;
+reg m_axis_tuser_reg , m_axis_tuser_next;
 
-reg [1:0] start_packet_reg = 2'b00;
-reg error_bad_frame_reg = 1'b0, error_bad_frame_next;
-reg error_bad_fcs_reg = 1'b0, error_bad_fcs_next;
-reg rx_bad_block_reg = 1'b0;
+reg [1:0] start_packet_reg ;
+reg error_bad_frame_reg , error_bad_frame_next;
+reg error_bad_fcs_reg , error_bad_fcs_next;
+reg rx_bad_block_reg ;
 
-reg [PTP_TS_WIDTH-1:0] ptp_ts_reg = 0;
+reg [PTP_TS_WIDTH-1:0] ptp_ts_reg ;
 
-reg [31:0] crc_state = 32'hFFFFFFFF;
-reg [31:0] crc_state3 = 32'hFFFFFFFF;
+reg [31:0] crc_state ;
+reg [31:0] crc_state3 ;
 
 wire [31:0] crc_next0;
 wire [31:0] crc_next1;
@@ -204,7 +204,7 @@ wire crc_valid2 = crc_next2 == ~32'h2144df1c;
 wire crc_valid3 = crc_next3 == ~32'h2144df1c;
 wire crc_valid7 = crc_next7 == ~32'h2144df1c;
 
-reg crc_valid7_save = 1'b0;
+reg crc_valid7_save ;
 
 assign m_axis_tdata = m_axis_tdata_reg;
 assign m_axis_tkeep = m_axis_tkeep_reg;

@@ -131,21 +131,21 @@ endgenerate
 
 wire [DATA_WIDTH-1:0] descrambled_rx_data;
 
-reg [DATA_WIDTH-1:0] encoded_rx_data_reg = {DATA_WIDTH{1'b0}};
-reg [HDR_WIDTH-1:0] encoded_rx_hdr_reg = {HDR_WIDTH{1'b0}};
+reg [DATA_WIDTH-1:0] encoded_rx_data_reg ;
+reg [HDR_WIDTH-1:0] encoded_rx_hdr_reg ;
 
-reg [57:0] scrambler_state_reg = {58{1'b1}};
+reg [57:0] scrambler_state_reg ;
 wire [57:0] scrambler_state;
 
-reg [30:0] prbs31_state_reg = 31'h7fffffff;
+reg [30:0] prbs31_state_reg ;
 wire [30:0] prbs31_state;
 wire [DATA_WIDTH+HDR_WIDTH-1:0] prbs31_data;
 
-reg [6:0] rx_error_count_reg = 0;
-reg [5:0] rx_error_count_1_reg = 0;
-reg [5:0] rx_error_count_2_reg = 0;
-reg [5:0] rx_error_count_1_temp = 0;
-reg [5:0] rx_error_count_2_temp = 0;
+reg [6:0] rx_error_count_reg ;
+reg [5:0] rx_error_count_1_reg ;
+reg [5:0] rx_error_count_2_reg ;
+reg [5:0] rx_error_count_1_temp ;
+reg [5:0] rx_error_count_2_temp ;
 
 lfsr #(
     .LFSR_WIDTH(58),

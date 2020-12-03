@@ -106,12 +106,12 @@ assign mac_gmii_rx_er = rgmii_rx_ctl_1 ^ rgmii_rx_ctl_2;
 
 // transmit
 
-reg rgmii_tx_clk_1 = 1'b1;
-reg rgmii_tx_clk_2 = 1'b0;
-reg rgmii_tx_clk_rise = 1'b1;
-reg rgmii_tx_clk_fall = 1'b1;
+reg rgmii_tx_clk_1 ;
+reg rgmii_tx_clk_2 ;
+reg rgmii_tx_clk_rise ;
+reg rgmii_tx_clk_fall ;
 
-reg [5:0] count_reg = 6'd0, count_next;
+reg [5:0] count_reg , count_next;
 
 always @(posedge clk) begin
     if (rst) begin
@@ -237,7 +237,7 @@ assign mac_gmii_tx_clk = clk;
 assign mac_gmii_tx_clk_en = gmii_clk_en;
 
 // reset sync
-reg [3:0] tx_rst_reg = 4'hf;
+reg [3:0] tx_rst_reg ;
 assign mac_gmii_tx_rst = tx_rst_reg[0];
 
 always @(posedge mac_gmii_tx_clk or posedge rst) begin
@@ -248,7 +248,7 @@ always @(posedge mac_gmii_tx_clk or posedge rst) begin
     end
 end
 
-reg [3:0] rx_rst_reg = 4'hf;
+reg [3:0] rx_rst_reg ;
 assign mac_gmii_rx_rst = rx_rst_reg[0];
 
 always @(posedge mac_gmii_rx_clk or posedge rst) begin

@@ -277,8 +277,8 @@ wire udp_tx_ip_payload_axis_tready;
 wire s_select_udp = (ip_rx_ip_protocol == 8'h11);
 wire s_select_ip = !s_select_udp;
 
-reg s_select_udp_reg = 1'b0;
-reg s_select_ip_reg = 1'b0;
+reg s_select_udp_reg ;
+reg s_select_ip_reg ;
 
 always @(posedge clk) begin
     if (rst) begin

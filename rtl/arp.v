@@ -167,12 +167,12 @@ arp_eth_rx_inst (
     .error_invalid_header()
 );
 
-reg outgoing_frame_valid_reg = 1'b0, outgoing_frame_valid_next;
+reg outgoing_frame_valid_reg , outgoing_frame_valid_next;
 wire outgoing_frame_ready;
-reg [47:0] outgoing_eth_dest_mac_reg = 48'd0, outgoing_eth_dest_mac_next;
-reg [15:0] outgoing_arp_oper_reg = 16'd0, outgoing_arp_oper_next;
-reg [47:0] outgoing_arp_tha_reg = 48'd0, outgoing_arp_tha_next;
-reg [31:0] outgoing_arp_tpa_reg = 32'd0, outgoing_arp_tpa_next;
+reg [47:0] outgoing_eth_dest_mac_reg , outgoing_eth_dest_mac_next;
+reg [15:0] outgoing_arp_oper_reg , outgoing_arp_oper_next;
+reg [47:0] outgoing_arp_tha_reg , outgoing_arp_tha_next;
+reg [31:0] outgoing_arp_tpa_reg , outgoing_arp_tpa_next;
 
 arp_eth_tx #(
     .DATA_WIDTH(DATA_WIDTH),
@@ -211,15 +211,15 @@ arp_eth_tx_inst (
     .busy()
 );
 
-reg cache_query_request_valid_reg = 1'b0, cache_query_request_valid_next;
-reg [31:0] cache_query_request_ip_reg = 32'd0, cache_query_request_ip_next;
+reg cache_query_request_valid_reg , cache_query_request_valid_next;
+reg [31:0] cache_query_request_ip_reg , cache_query_request_ip_next;
 wire cache_query_response_valid;
 wire cache_query_response_error;
 wire [47:0] cache_query_response_mac;
 
-reg cache_write_request_valid_reg = 1'b0, cache_write_request_valid_next;
-reg [31:0] cache_write_request_ip_reg = 32'd0, cache_write_request_ip_next;
-reg [47:0] cache_write_request_mac_reg = 48'd0, cache_write_request_mac_next;
+reg cache_write_request_valid_reg , cache_write_request_valid_next;
+reg [31:0] cache_write_request_ip_reg , cache_write_request_ip_next;
+reg [47:0] cache_write_request_mac_reg , cache_write_request_mac_next;
 
 /*
  * ARP cache
@@ -247,17 +247,17 @@ arp_cache_inst (
     .clear_cache(clear_cache)
 );
 
-reg arp_request_operation_reg = 1'b0, arp_request_operation_next;
+reg arp_request_operation_reg , arp_request_operation_next;
 
-reg arp_request_ready_reg = 1'b0, arp_request_ready_next;
-reg [31:0] arp_request_ip_reg = 32'd0, arp_request_ip_next;
+reg arp_request_ready_reg , arp_request_ready_next;
+reg [31:0] arp_request_ip_reg , arp_request_ip_next;
 
-reg arp_response_valid_reg = 1'b0, arp_response_valid_next;
-reg arp_response_error_reg = 1'b0, arp_response_error_next;
-reg [47:0] arp_response_mac_reg = 48'd0, arp_response_mac_next;
+reg arp_response_valid_reg , arp_response_valid_next;
+reg arp_response_error_reg , arp_response_error_next;
+reg [47:0] arp_response_mac_reg , arp_response_mac_next;
 
-reg [5:0] arp_request_retry_cnt_reg = 6'd0, arp_request_retry_cnt_next;
-reg [35:0] arp_request_timer_reg = 36'd0, arp_request_timer_next;
+reg [5:0] arp_request_retry_cnt_reg , arp_request_retry_cnt_next;
+reg [35:0] arp_request_timer_reg , arp_request_timer_next;
 
 assign arp_request_ready = arp_request_ready_reg;
 

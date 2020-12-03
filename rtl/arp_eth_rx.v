@@ -125,30 +125,30 @@ produces the frame fields in parallel.
 // datapath control signals
 reg store_eth_hdr;
 
-reg read_eth_header_reg = 1'b1, read_eth_header_next;
-reg read_arp_header_reg = 1'b0, read_arp_header_next;
-reg [PTR_WIDTH-1:0] ptr_reg = 0, ptr_next;
+reg read_eth_header_reg , read_eth_header_next;
+reg read_arp_header_reg , read_arp_header_next;
+reg [PTR_WIDTH-1:0] ptr_reg , ptr_next;
 
-reg s_eth_hdr_ready_reg = 1'b0, s_eth_hdr_ready_next;
-reg s_eth_payload_axis_tready_reg = 1'b0, s_eth_payload_axis_tready_next;
+reg s_eth_hdr_ready_reg , s_eth_hdr_ready_next;
+reg s_eth_payload_axis_tready_reg , s_eth_payload_axis_tready_next;
 
-reg m_frame_valid_reg = 1'b0, m_frame_valid_next;
-reg [47:0] m_eth_dest_mac_reg = 48'd0;
-reg [47:0] m_eth_src_mac_reg = 48'd0;
-reg [15:0] m_eth_type_reg = 16'd0;
-reg [15:0] m_arp_htype_reg = 16'd0, m_arp_htype_next;
-reg [15:0] m_arp_ptype_reg = 16'd0, m_arp_ptype_next;
-reg [7:0]  m_arp_hlen_reg = 8'd0, m_arp_hlen_next;
-reg [7:0]  m_arp_plen_reg = 8'd0, m_arp_plen_next;
-reg [15:0] m_arp_oper_reg = 16'd0, m_arp_oper_next;
-reg [47:0] m_arp_sha_reg = 48'd0, m_arp_sha_next;
-reg [31:0] m_arp_spa_reg = 32'd0, m_arp_spa_next;
-reg [47:0] m_arp_tha_reg = 48'd0, m_arp_tha_next;
-reg [31:0] m_arp_tpa_reg = 32'd0, m_arp_tpa_next;
+reg m_frame_valid_reg , m_frame_valid_next;
+reg [47:0] m_eth_dest_mac_reg ;
+reg [47:0] m_eth_src_mac_reg ;
+reg [15:0] m_eth_type_reg ;
+reg [15:0] m_arp_htype_reg , m_arp_htype_next;
+reg [15:0] m_arp_ptype_reg , m_arp_ptype_next;
+reg [7:0]  m_arp_hlen_reg , m_arp_hlen_next;
+reg [7:0]  m_arp_plen_reg , m_arp_plen_next;
+reg [15:0] m_arp_oper_reg , m_arp_oper_next;
+reg [47:0] m_arp_sha_reg , m_arp_sha_next;
+reg [31:0] m_arp_spa_reg , m_arp_spa_next;
+reg [47:0] m_arp_tha_reg , m_arp_tha_next;
+reg [31:0] m_arp_tpa_reg , m_arp_tpa_next;
 
-reg busy_reg = 1'b0;
-reg error_header_early_termination_reg = 1'b0, error_header_early_termination_next;
-reg error_invalid_header_reg = 1'b0, error_invalid_header_next;
+reg busy_reg ;
+reg error_header_early_termination_reg , error_header_early_termination_next;
+reg error_invalid_header_reg , error_invalid_header_next;
 
 assign s_eth_hdr_ready = s_eth_hdr_ready_reg;
 assign s_eth_payload_axis_tready = s_eth_payload_axis_tready_reg;

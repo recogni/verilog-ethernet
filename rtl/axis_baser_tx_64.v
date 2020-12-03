@@ -171,7 +171,7 @@ localparam [2:0]
     STATE_IFG = 3'd5,
     STATE_WAIT_END = 3'd6;
 
-reg [2:0] state_reg = STATE_IDLE, state_next;
+reg [2:0] state_reg , state_next;
 
 // datapath control signals
 reg reset_crc;
@@ -180,16 +180,16 @@ reg update_crc;
 reg swap_lanes;
 reg unswap_lanes;
 
-reg lanes_swapped = 1'b0;
-reg [31:0] swap_data = 32'd0;
+reg lanes_swapped ;
+reg [31:0] swap_data ;
 
-reg delay_type_valid = 1'b0;
-reg [3:0] delay_type = OUTPUT_TYPE_IDLE;
+reg delay_type_valid ;
+reg [3:0] delay_type ;
 
 reg [DATA_WIDTH-1:0] s_axis_tdata_masked;
 
-reg [DATA_WIDTH-1:0] s_tdata_reg = {DATA_WIDTH{1'b0}}, s_tdata_next;
-reg [7:0]  s_tkeep_reg = 8'd0, s_tkeep_next;
+reg [DATA_WIDTH-1:0] s_tdata_reg , s_tdata_next;
+reg [7:0]  s_tkeep_reg , s_tkeep_next;
 
 reg [DATA_WIDTH-1:0] fcs_output_data_0;
 reg [DATA_WIDTH-1:0] fcs_output_data_1;
@@ -200,19 +200,19 @@ reg [7:0] ifg_offset;
 
 reg extra_cycle;
 
-reg [15:0] frame_ptr_reg = 16'd0, frame_ptr_next;
+reg [15:0] frame_ptr_reg , frame_ptr_next;
 
-reg [7:0] ifg_count_reg = 8'd0, ifg_count_next;
-reg [1:0] deficit_idle_count_reg = 2'd0, deficit_idle_count_next;
+reg [7:0] ifg_count_reg , ifg_count_next;
+reg [1:0] deficit_idle_count_reg , deficit_idle_count_next;
 
-reg s_axis_tready_reg = 1'b0, s_axis_tready_next;
+reg s_axis_tready_reg , s_axis_tready_next;
 
-reg [PTP_TS_WIDTH-1:0] m_axis_ptp_ts_reg = 0, m_axis_ptp_ts_next;
-reg [PTP_TAG_WIDTH-1:0] m_axis_ptp_ts_tag_reg = 0, m_axis_ptp_ts_tag_next;
-reg m_axis_ptp_ts_valid_reg = 1'b0, m_axis_ptp_ts_valid_next;
-reg m_axis_ptp_ts_valid_int_reg = 1'b0, m_axis_ptp_ts_valid_int_next;
+reg [PTP_TS_WIDTH-1:0] m_axis_ptp_ts_reg , m_axis_ptp_ts_next;
+reg [PTP_TAG_WIDTH-1:0] m_axis_ptp_ts_tag_reg , m_axis_ptp_ts_tag_next;
+reg m_axis_ptp_ts_valid_reg , m_axis_ptp_ts_valid_next;
+reg m_axis_ptp_ts_valid_int_reg , m_axis_ptp_ts_valid_int_next;
 
-reg [31:0] crc_state = 32'hFFFFFFFF;
+reg [31:0] crc_state ;
 
 wire [31:0] crc_next0;
 wire [31:0] crc_next1;
@@ -223,14 +223,14 @@ wire [31:0] crc_next5;
 wire [31:0] crc_next6;
 wire [31:0] crc_next7;
 
-reg [DATA_WIDTH-1:0] encoded_tx_data_reg = {{8{CTRL_IDLE}}, BLOCK_TYPE_CTRL};
-reg [HDR_WIDTH-1:0] encoded_tx_hdr_reg = SYNC_CTRL;
+reg [DATA_WIDTH-1:0] encoded_tx_data_reg ;
+reg [HDR_WIDTH-1:0] encoded_tx_hdr_reg ;
 
-reg [DATA_WIDTH-1:0] output_data_reg = {DATA_WIDTH{1'b0}}, output_data_next;
-reg [3:0] output_type_reg = OUTPUT_TYPE_IDLE, output_type_next;
+reg [DATA_WIDTH-1:0] output_data_reg , output_data_next;
+reg [3:0] output_type_reg , output_type_next;
 
-reg [1:0] start_packet_reg = 2'b00, start_packet_next;
-reg error_underflow_reg = 1'b0, error_underflow_next;
+reg [1:0] start_packet_reg , start_packet_next;
+reg error_underflow_reg , error_underflow_next;
 
 assign s_axis_tready = s_axis_tready_reg;
 
