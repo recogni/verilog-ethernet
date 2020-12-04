@@ -138,42 +138,44 @@ end
 reg [6:0] rx_speed_count_1 ;
 reg [1:0] rx_speed_count_2 ;
 
+// Hard-wired for speed = 2 => 1G 
 always @(posedge gtx_clk) begin
-    if (gtx_rst) begin
+//    if (gtx_rst) begin
         rx_speed_count_1 <= 0;
         rx_speed_count_2 <= 0;
         speed_reg <= 2'b10;
         mii_select_reg <= 1'b0;
-    end else begin
-        rx_speed_count_1 <= rx_speed_count_1 + 1;
-        
-        if (rx_prescale_sync[1] ^ rx_prescale_sync[2]) begin
-            rx_speed_count_2 <= rx_speed_count_2 + 1;
-        end
+//    end 
+//  else begin
+//      rx_speed_count_1 <= rx_speed_count_1 + 1;
+//      
+//      if (rx_prescale_sync[1] ^ rx_prescale_sync[2]) begin
+//          rx_speed_count_2 <= rx_speed_count_2 + 1;
+//      end
 
-        if (&rx_speed_count_1) begin
-            // reference count overflow - 10M
-            rx_speed_count_1 <= 0;
-            rx_speed_count_2 <= 0;
-            speed_reg <= 2'b00;
-            mii_select_reg <= 1'b1;
-        end
+        //if (&rx_speed_count_1) begin
+        //    // reference count overflow - 10M
+        //    rx_speed_count_1 <= 0;
+        //    rx_speed_count_2 <= 0;
+        //    speed_reg <= 2'b00;
+        //    mii_select_reg <= 1'b1;
+        //end
 
-        if (&rx_speed_count_2) begin
-            // prescaled count overflow - 100M or 1000M
-            rx_speed_count_1 <= 0;
-            rx_speed_count_2 <= 0;
-            if (rx_speed_count_1[6:5]) begin
-                // large reference count - 100M
-                speed_reg <= 2'b01;
-                mii_select_reg <= 1'b1;
-            end else begin
-                // small reference count - 1000M
-                speed_reg <= 2'b10;
-                mii_select_reg <= 1'b0;
-            end
-        end
-    end
+//        if (&rx_speed_count_2) begin
+//            // prescaled count overflow - 100M or 1000M
+//            rx_speed_count_1 <= 0;
+//            rx_speed_count_2 <= 0;
+//            if (rx_speed_count_1[6:5]) begin
+//                // large reference count - 100M
+//                speed_reg <= 2'b01;
+//                mii_select_reg <= 1'b1;
+//            end else begin
+//                // small reference count - 1000M
+//                speed_reg <= 2'b10;
+//                mii_select_reg <= 1'b0;
+//            end
+//        end
+//    end
 end
 
 assign speed = speed_reg;
