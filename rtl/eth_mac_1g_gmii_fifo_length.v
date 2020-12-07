@@ -369,7 +369,7 @@ assign rx_fifo_push_last = rx_fifo_push && rx_fifo_axis_tlast;
 logic rx_fifo_push_last_good;
 assign rx_fifo_push_last_good = rx_fifo_push_last && !rx_fifo_axis_tuser;
 
-always_ff @(posedge rx_clk or negedge rx_rst) begin
+always_ff @(posedge rx_clk or posedge rx_rst) begin
    if (rx_rst == '1) begin
         length_counter <= '0;   
    end else begin
